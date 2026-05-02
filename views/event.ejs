@@ -1,0 +1,31 @@
+<section
+  class="event-hero <%= event.imageUrl ? 'event-hero-with-image' : '' %>"
+  <% if (event.imageUrl) { %>style="background-image: url('<%= event.imageUrl %>');"<% } %>
+>
+  <h1><%= event.title %></h1>
+</section>
+
+<section>
+  <h2>Description</h2>
+  <p><%= event.description %></p>
+</section>
+
+<section>
+  <h2>Participants</h2>
+  <ul class="participant-list">
+    <% event.participants.forEach((participant) => { %>
+      <li class="participant participant-<%= participant.status %>">
+        <span><%= participant.name %></span>
+        <span aria-label="Etat de l'invitation">
+          <% if (participant.status === 'confirmed') { %>
+            ✅
+          <% } else if (participant.status === 'declined') { %>
+            ❌
+          <% } else { %>
+            ❔
+          <% } %>
+        </span>
+      </li>
+    <% }) %>
+  </ul>
+</section>

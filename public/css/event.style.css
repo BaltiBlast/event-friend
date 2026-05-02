@@ -1,0 +1,65 @@
+.event-hero {
+  align-items: center;
+  background-position: center;
+  background-size: cover;
+  border: 1px solid var(--pico-muted-border-color);
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5rem;
+  min-height: 280px;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.event-hero-with-image::before {
+  background: rgb(0 0 0 / 35%);
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.event-hero h1 {
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.event-hero-with-image h1 {
+  color: #fff;
+}
+
+.event-hero + section,
+.event-hero + section + section {
+  margin-bottom: 5rem;
+}
+
+.participant-list {
+  list-style: none;
+  padding: 0;
+}
+
+.participant {
+  align-items: center;
+  border-bottom: 1px solid var(--pico-muted-border-color);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+}
+
+.participant:last-child {
+  border-bottom: 0;
+}
+
+.participant-confirmed {
+  color: #178a43;
+}
+
+.participant-pending {
+  color: #6b7280;
+}
+
+.participant-declined {
+  color: #c62828;
+}
