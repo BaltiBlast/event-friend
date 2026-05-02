@@ -1,4 +1,17 @@
-<section>
-  <h2>Bienvenue sur Gay'vent</h2>
-  <p>Votre application est prête ✨</p>
+<section class="login-panel">
+  <h1>Gay'vent</h1>
+
+  <form class="login-form" action="/login" method="post">
+    <label for="email">
+      Email
+      <input type="email" id="email" name="email" autocomplete="email" required />
+    </label>
+
+    <label for="password">
+      Password
+      <input type="password" id="password" name="password" autocomplete="current-password" required />
+    </label>
+
+    <button type="submit">Connexion</button>
+  </form>
 </section>

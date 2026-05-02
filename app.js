@@ -15,7 +15,7 @@ app.use(expressLayouts);
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.render('home', { title: "Gay'vent" });
+  res.render('home', { title: "Gay'vent", hideChrome: true, mainClass: 'login-page' });
 });
 
 app.listen(PORT, () => {

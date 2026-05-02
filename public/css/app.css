@@ -1,0 +1,16 @@
+.login-page {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.login-panel {
+  max-width: 800px;
+  text-align: center;
+  width: 100%;
+}
+
+.login-form {
+  text-align: left;
+}
