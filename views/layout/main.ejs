@@ -15,5 +15,10 @@
     <% if (typeof hideChrome === 'undefined' || !hideChrome) { %>
       <%- include('../partials/footer') %>
     <% } %>
+    <% if (typeof scripts !== 'undefined') { %>
+      <% scripts.forEach((script) => { %>
+        <script src="<%= script %>"></script>
+      <% }) %>
+    <% } %>
   </body>
 </html>

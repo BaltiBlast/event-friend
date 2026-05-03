@@ -12,6 +12,7 @@ app.set("views", "./views");
 app.set("layout", "layout/main");
 
 app.use(expressLayouts);
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
@@ -42,6 +43,18 @@ app.get("/event", (req, res) => {
       participants: participants.sort((a, b) => statusOrder[a.status] - statusOrder[b.status]),
     },
   });
+});
+
+app.get("/create-event", (req, res) => {
+  res.render("create-event", {
+    title: "Creer un evenement",
+    scripts: ["/js/create-event.js"],
+  });
+});
+
+app.post("/create-event", (req, res) => {
+  console.log(req.body);
+  res.redirect("/create-event");
 });
 
 app.listen(PORT, () => {
