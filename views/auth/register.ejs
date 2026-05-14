@@ -4,6 +4,11 @@
   <h1>Gay'vent</h1>
 
   <form class="auth-form" action="/register" method="post">
+    <label for="email">
+      Email
+      <input type="email" id="email" name="email" autocomplete="email" required />
+    </label>
+
     <div class="auth-name-grid">
       <label for="lastName">
         Nom
@@ -15,11 +20,6 @@
         <input type="text" id="firstName" name="firstName" autocomplete="given-name" required />
       </label>
     </div>
-
-    <label for="email">
-      Email
-      <input type="email" id="email" name="email" autocomplete="email" required />
-    </label>
 
     <label for="password">
       Mot de passe
