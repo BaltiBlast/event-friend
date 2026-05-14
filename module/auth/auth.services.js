@@ -5,3 +5,11 @@ export function getLoginViewData() {
     mainClass: "auth-page",
   };
 }
+
+export function getRegisterViewData() {
+  return {
+    title: "Inscription - Gay'vent",
+    hideChrome: true,
+    mainClass: "auth-page",
+  };
+}

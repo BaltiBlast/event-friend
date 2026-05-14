@@ -1,8 +1,9 @@
 import express from "express";
-import { showLogin } from "./auth.controllers.js";
+import { showLogin, showRegister } from "./auth.controllers.js";
 
 const router = express.Router();
 
 router.get("/login", showLogin);
+router.get("/register", showRegister);
 
 export default router;

@@ -1,0 +1,35 @@
+<a class="auth-back-link" href="/">Retour</a>
+
+<section class="auth-panel">
+  <h1>Gay'vent</h1>
+
+  <form class="auth-form" action="/register" method="post">
+    <div class="auth-name-grid">
+      <label for="lastName">
+        Nom
+        <input type="text" id="lastName" name="lastName" autocomplete="family-name" required />
+      </label>
+
+      <label for="firstName">
+        Prénom
+        <input type="text" id="firstName" name="firstName" autocomplete="given-name" required />
+      </label>
+    </div>
+
+    <label for="email">
+      Email
+      <input type="email" id="email" name="email" autocomplete="email" required />
+    </label>
+
+    <label for="password">
+      Mot de passe
+      <input type="password" id="password" name="password" autocomplete="new-password" required />
+    </label>
+
+    <button type="submit">S'inscrire</button>
+  </form>
+
+  <div class="auth-separator" aria-hidden="true"></div>
+
+  <button class="auth-google-button" type="button">S'inscrire avec Google</button>
+</section>

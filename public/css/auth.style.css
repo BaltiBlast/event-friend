@@ -22,6 +22,12 @@
   text-align: left;
 }
 
+.auth-name-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .auth-separator {
   border-top: 1px solid var(--pico-muted-border-color);
   margin: 1.5rem 0;
@@ -29,4 +35,10 @@
 
 .auth-google-button {
   width: 100%;
+}
+
+@media (max-width: 576px) {
+  .auth-name-grid {
+    grid-template-columns: 1fr;
+  }
 }
