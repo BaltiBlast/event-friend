@@ -1,6 +1,7 @@
 @import url("./event.style.css");
 @import url("./home.style.css");
 @import url("./create-event.style.css");
+@import url("./auth.style.css");
 
 header nav h1 {
   margin: 0;
