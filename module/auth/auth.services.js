@@ -1,15 +1,13 @@
 export function getLoginViewData() {
   return {
     title: "Connexion - Gay'vent",
-    hideChrome: true,
-    mainClass: "auth-page",
+    hideChrome: false,
   };
 }
 
 export function getRegisterViewData() {
   return {
     title: "Inscription - Gay'vent",
-    hideChrome: true,
-    mainClass: "auth-page",
+    hideChrome: false,
   };
 }

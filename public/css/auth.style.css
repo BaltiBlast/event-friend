@@ -1,21 +1,7 @@
-.auth-page {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  min-height: 100vh;
-  position: relative;
-}
-
 .auth-back-link {
   left: 1rem;
   position: absolute;
   top: 1rem;
-}
-
-.auth-panel {
-  max-width: 800px;
-  text-align: center;
-  width: 100%;
 }
 
 .auth-form {

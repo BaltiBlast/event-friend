@@ -11,7 +11,7 @@
     <% if (typeof hideChrome === 'undefined' || !hideChrome) { %>
       <%- include('../partials/header') %>
     <% } %>
-    <main class="container <%= typeof mainClass !== 'undefined' ? mainClass : '' %>"><%- body %></main>
+    <main class="container"><%- body %></main>
     <% if (typeof hideChrome === 'undefined' || !hideChrome) { %>
       <%- include('../partials/footer') %>
     <% } %>

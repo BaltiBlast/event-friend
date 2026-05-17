@@ -3,6 +3,20 @@
 @import url("./create-event.style.css");
 @import url("./auth.style.css");
 
+body > main.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+body > main.container > * {
+  width: 100%;
+}
+
+body > header.container {
+  margin-bottom: 2rem;
+}
+
 header nav h1 {
   margin: 0;
 }
