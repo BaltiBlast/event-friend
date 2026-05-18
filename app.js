@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import expressLayouts from "express-ejs-layouts";
 import router from "./router.js";
+import connectDatabase from "./config/database.js";
 
 dotenv.config();
 
@@ -17,6 +18,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(router);
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+const startServer = async () => {
+  await connectDatabase();
+
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
+};
+
+startServer();
