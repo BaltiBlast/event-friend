@@ -12,6 +12,11 @@
       <input type="url" id="imageUrl" name="imageUrl" placeholder="https://..." />
     </label>
 
+    <label for="location">
+      Lieu <sub>optionnel</sub>
+      <input type="text" id="location" name="location" />
+    </label>
+
     <div class="create-event-date-time">
       <label for="date">
         Date <sub>obligatoire</sub>
@@ -34,12 +39,7 @@
 
       <div class="participant-picker">
         <label for="participant-search">
-          <input
-            type="search"
-            id="participant-search"
-            placeholder="Rechercher une personne"
-            autocomplete="off"
-          />
+          <input type="search" id="participant-search" placeholder="Rechercher une personne" autocomplete="off" />
         </label>
 
         <div id="participant-options" class="participant-options" hidden></div>
