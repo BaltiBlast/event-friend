@@ -1,0 +1,5 @@
+@baseUrl = http://localhost:3000
+@userId = 000000000000000000000000
+
+### Delete user by id
+DELETE {{baseUrl}}/users/{{userId}}
