@@ -17,7 +17,7 @@ class User extends CoreMapper {
 
   async updateUser(userId, userData) {
     return this.model.findByIdAndUpdate(userId, userData, {
-      new: true,
+      returnDocument: "after",
       runValidators: true,
     });
   }

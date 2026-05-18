@@ -1,5 +1,15 @@
 @baseUrl = http://localhost:3000
-@userId = 000000000000000000000000
+@userId = xxxxx
 
 ### Delete user by id
 DELETE {{baseUrl}}/users/{{userId}}
+
+### Update user by id
+PATCH {{baseUrl}}/users/{{userId}}
+Content-Type: application/json
+
+{
+  "firstName": "Updated",
+  "lastName": "User",
+  "email": "updated.user@example.com"
+}

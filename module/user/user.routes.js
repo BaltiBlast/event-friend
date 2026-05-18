@@ -1,8 +1,9 @@
 import express from "express";
-import { removeUser } from "./user.controllers.js";
+import { removeUser, updateUserById } from "./user.controllers.js";
 
 const router = express.Router();
 
+router.patch("/users/:userId", updateUserById);
 router.delete("/users/:userId", removeUser);
 
 export default router;
