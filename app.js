@@ -14,6 +14,7 @@ app.set("views", "./views");
 app.set("layout", "layout/main");
 
 app.use(expressLayouts);
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(router);
