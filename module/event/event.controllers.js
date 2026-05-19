@@ -10,8 +10,10 @@ export function showCreateEvent(req, res) {
 
 export async function createEvent(req, res) {
   try {
-    const userId = req.user?._id || req.user?.id || req.body.userId || req.body.user;
+    const userId = req.user._id || req.user.id;
     const event = await createEventService(req.body, userId);
+
+    req.session.events = [...(req.session.events || []), event.toObject()];
 
     if (req.is("application/json")) {
       return res.status(201).json(event);

@@ -1,6 +1,10 @@
 <section>
   <h1>Creer un evenement</h1>
 
+  <% if (typeof error !== 'undefined') { %>
+    <p role="alert"><%= error %></p>
+  <% } %>
+
   <form action="/create-event" method="post">
     <label for="title">
       Titre <sub>obligatoire</sub>

@@ -1,7 +1,7 @@
 @baseUrl = http://localhost:3000
 
 ### Create event with JSON
-POST {{baseUrl}}/create-events
+POST {{baseUrl}}/create-event
 Content-Type: application/json
 
 {

@@ -23,7 +23,8 @@ export async function login(req, res) {
 
     req.session.user = user;
     req.session.events = events;
-    res.locals.user = user;
+    req.user = user;
+    res.locals.user = req.user;
     res.locals.events = events;
 
     return req.session.save((error) => {
