@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import session from "express-session";
 import expressLayouts from "express-ejs-layouts";
 import router from "./router.js";
 import connectDatabase from "./config/database.js";
@@ -17,6 +18,13 @@ app.use(expressLayouts);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 app.use(router);
 
 const startServer = async () => {
