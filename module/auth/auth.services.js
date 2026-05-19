@@ -1,3 +1,4 @@
+import argon2 from "argon2";
 import { UserMapper } from "../../models/index.mapper.js";
 
 export function getLoginViewData() {
@@ -9,12 +10,13 @@ export function getLoginViewData() {
 
 export async function registerUser(userData) {
   const { email, firstName, lastName, password } = userData;
+  const hashedPassword = await argon2.hash(password);
 
   return UserMapper.createUser({
     email,
     firstName,
     lastName,
-    password,
+    password: hashedPassword,
   });
 }
 
