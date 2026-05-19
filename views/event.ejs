@@ -1,8 +1,28 @@
+<p><a href="/events">Retour aux événements</a></p>
+
 <section
   class="event-hero <%= event.imageUrl ? 'event-hero-with-image' : '' %>"
   <% if (event.imageUrl) { %>style="background-image: url('<%= event.imageUrl %>');"<% } %>
 >
   <h1><%= event.title %></h1>
+</section>
+
+<section>
+  <h2>Informations</h2>
+  <div class="event-details-row">
+    <span class="event-detail-item">
+      <strong>📅 Date</strong>
+      <span><%= event.dateLabel %></span>
+    </span>
+    <span class="event-detail-item">
+      <strong>🕒 Heure</strong>
+      <span><%= event.time %></span>
+    </span>
+    <span class="event-detail-item">
+      <strong>📍 Lieu</strong>
+      <span><%= event.location || "Non précisé" %></span>
+    </span>
+  </div>
 </section>
 
 <section>
@@ -12,20 +32,15 @@
 
 <section>
   <h2>Participants</h2>
-  <ul class="participant-list">
-    <% event.participants.forEach((participant) => { %>
-      <li class="participant participant-<%= participant.status %>">
-        <span><%= participant.name %></span>
-        <span aria-label="Etat de l'invitation">
-          <% if (participant.status === 'confirmed') { %>
-            ✅
-          <% } else if (participant.status === 'declined') { %>
-            ❌
-          <% } else { %>
-            ❔
-          <% } %>
-        </span>
-      </li>
-    <% }) %>
-  </ul>
+  <% if (event.participants.length === 0) { %>
+    <p>Aucun participant pour le moment.</p>
+  <% } else { %>
+    <ul class="participant-list">
+      <% event.participants.forEach((participant) => { %>
+        <li class="participant">
+          <span><%= participant %></span>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
 </section>

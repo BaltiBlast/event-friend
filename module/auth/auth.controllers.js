@@ -41,3 +41,13 @@ export async function login(req, res) {
     });
   }
 }
+
+export function logout(req, res) {
+  req.session.destroy((error) => {
+    if (error) {
+      return res.status(500).send(error.message);
+    }
+
+    return res.redirect("/");
+  });
+}

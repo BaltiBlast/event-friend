@@ -1,0 +1,103 @@
+<section>
+  <h1>Mes événements</h1>
+
+  <% if (events.length === 0) { %>
+    <p>Vous n'avez pas encore d'événement.</p>
+    <p><a href="/create-event">Créer un événement</a></p>
+  <% } else { %>
+    <ul class="event-card-list">
+      <% events.forEach((event) => { %>
+        <li>
+          <article class="event-card">
+            <a class="event-card-link" href="/events/<%= event.id %>">
+              <strong class="event-card-title"><%= event.title %></strong>
+              <span class="event-details-row">
+                <span class="event-detail-item">
+                  <strong>📅 Date</strong>
+                  <span><%= event.dateLabel %></span>
+                </span>
+                <span class="event-detail-item">
+                  <strong>🕒 Heure</strong>
+                  <span><%= event.time %></span>
+                </span>
+                <span class="event-detail-item">
+                  <strong>📍 Lieu</strong>
+                  <span><%= event.location || "Non précisé" %></span>
+                </span>
+              </span>
+            </a>
+            <button
+              class="event-edit-button"
+              type="button"
+              aria-label="Modifier <%= event.title %>"
+              data-event-modal-open="edit-event-<%= event.id %>"
+            >
+              ✏️
+            </button>
+          </article>
+
+          <dialog id="edit-event-<%= event.id %>">
+            <article>
+              <header>
+                <button
+                  aria-label="Fermer"
+                  rel="prev"
+                  type="button"
+                  data-event-modal-close
+                ></button>
+                <h2>Modifier l'événement</h2>
+              </header>
+
+              <form action="/events/<%= event.id %>/update" method="post">
+                <label for="title-<%= event.id %>">
+                  Titre <sub>obligatoire</sub>
+                  <input type="text" id="title-<%= event.id %>" name="title" value="<%= event.title %>" required />
+                </label>
+
+                <label for="imageUrl-<%= event.id %>">
+                  Image <sub>optionnel</sub>
+                  <input type="url" id="imageUrl-<%= event.id %>" name="imageUrl" value="<%= event.imageUrl || '' %>" placeholder="https://..." />
+                </label>
+
+                <label for="location-<%= event.id %>">
+                  Lieu <sub>optionnel</sub>
+                  <input type="text" id="location-<%= event.id %>" name="location" value="<%= event.location || '' %>" />
+                </label>
+
+                <div class="create-event-date-time">
+                  <label for="date-<%= event.id %>">
+                    Date <sub>obligatoire</sub>
+                    <input type="date" id="date-<%= event.id %>" name="date" value="<%= event.dateInputValue %>" required />
+                  </label>
+
+                  <label for="time-<%= event.id %>">
+                    Heure <sub>obligatoire</sub>
+                    <input type="time" id="time-<%= event.id %>" name="time" value="<%= event.time %>" required />
+                  </label>
+                </div>
+
+                <label for="description-<%= event.id %>">
+                  Description <sub>obligatoire</sub>
+                  <textarea id="description-<%= event.id %>" name="description" required><%= event.description %></textarea>
+                </label>
+
+                <label for="participants-<%= event.id %>">
+                  Participants <sub>optionnel</sub>
+                  <input
+                    type="text"
+                    id="participants-<%= event.id %>"
+                    name="participants"
+                    value="<%= event.participants.join(', ') %>"
+                    placeholder="Alex, Camille"
+                  />
+                </label>
+
+                <button type="submit">Modifier l'événement</button>
+              </form>
+            </article>
+          </dialog>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+</section>

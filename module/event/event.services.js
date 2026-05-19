@@ -1,34 +1,16 @@
 import { EventMapper } from "../../models/index.mapper.js";
 
-const participants = [
-  { name: "Alex", status: "confirmed" },
-  { name: "Camille", status: "pending" },
-  { name: "Jordan", status: "declined" },
-  { name: "Sam", status: "confirmed" },
-];
-
-const statusOrder = {
-  confirmed: 1,
-  pending: 2,
-  declined: 3,
-};
-
-export function getEventViewData() {
+export function getEventsViewData(events) {
   return {
-    title: "Soiree Gay'vent",
-    event: {
-      title: "Soiree Gay'vent",
-      description: "Une soiree conviviale pour se rencontrer, discuter et partager un bon moment autour d'un verre.",
-      imageUrl:
-        "https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/YBgLV1KNJPi8RDRB/photo-de-fond-mv0LyEz0y0coVvNK.jpeg",
-      participants: [...participants].sort((a, b) => statusOrder[a.status] - statusOrder[b.status]),
-    },
+    title: "Mes événements",
+    events: events.map(formatEvent),
+    scripts: ["/js/events.js"],
   };
 }
 
 export function getCreateEventViewData() {
   return {
-    title: "Creer un evenement",
+    title: "Créer un événement",
     scripts: ["/js/create-event.js"],
   };
 }
@@ -43,6 +25,64 @@ export async function createEvent(eventData, userId) {
   });
 }
 
+export async function updateEvent(eventId, eventData, userId) {
+  const event = await EventMapper.getEventByIdAndUser(eventId, userId);
+
+  if (!event) {
+    return null;
+  }
+
+  return EventMapper.updateEvent(eventId, {
+    ...eventData,
+    user: userId,
+    participants: formatParticipants(eventData.participants),
+  });
+}
+
+export async function getEventViewData(eventId, userId) {
+  const event = await EventMapper.getEventByIdAndUser(eventId, userId);
+
+  if (!event) {
+    return null;
+  }
+
+  return {
+    title: event.title,
+    event: formatEvent(event),
+  };
+}
+
+function formatEvent(event) {
+  const eventData = typeof event.toObject === "function" ? event.toObject() : event;
+
+  return {
+    ...eventData,
+    id: eventData._id?.toString() || eventData.id,
+    dateLabel: formatDate(eventData.date),
+    dateInputValue: formatDateInput(eventData.date),
+  };
+}
+
+function formatDate(date) {
+  if (!date) {
+    return "";
+  }
+
+  return new Intl.DateTimeFormat("fr-FR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(date));
+}
+
+function formatDateInput(date) {
+  if (!date) {
+    return "";
+  }
+
+  return new Date(date).toISOString().split("T")[0];
+}
+
 function formatParticipants(participants) {
   if (!participants) {
     return [];
@@ -52,5 +92,8 @@ function formatParticipants(participants) {
     return participants;
   }
 
-  return [participants];
+  return participants
+    .split(",")
+    .map((participant) => participant.trim())
+    .filter(Boolean);
 }

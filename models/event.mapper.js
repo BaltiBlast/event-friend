@@ -25,6 +25,10 @@ class Event extends CoreMapper {
   async getEventsByUser(userId) {
     return this.model.find({ user: userId }).sort({ date: 1, time: 1 });
   }
+
+  async getEventByIdAndUser(eventId, userId) {
+    return this.model.findOne({ _id: eventId, user: userId });
+  }
 }
 
 export default Event;
