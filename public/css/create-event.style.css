@@ -4,56 +4,6 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.participant-picker {
-  position: relative;
-}
-
-.participant-picker label {
-  margin-bottom: 0;
-}
-
-.participant-options {
-  background: var(--pico-card-background-color);
-  border: 1px solid var(--pico-muted-border-color);
-  box-shadow: var(--pico-card-box-shadow);
-  left: 0;
-  max-height: 16rem;
-  overflow-y: auto;
-  padding: 0.5rem;
-  position: absolute;
-  right: 0;
-  top: calc(100% + 0.25rem);
-  z-index: 10;
-}
-
-.participant-options label {
-  align-items: center;
-  display: flex;
-  gap: 0.75rem;
-  margin: 0;
-  padding: 0.5rem;
-}
-
-.participant-options input {
-  margin: 0;
-}
-
-.selected-participants {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  list-style: none;
-  padding: 0;
-}
-
-.selected-participants li {
-  align-items: center;
-  background: var(--pico-muted-border-color);
-  border-radius: 999px;
-  display: flex;
-  padding: 0.25rem 0.75rem;
-}
-
 @media (max-width: 640px) {
   .create-event-date-time {
     grid-template-columns: 1fr;

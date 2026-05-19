@@ -128,15 +128,3 @@
 .participant:last-child {
   border-bottom: 0;
 }
-
-.participant-confirmed {
-  color: #178a43;
-}
-
-.participant-pending {
-  color: #6b7280;
-}
-
-.participant-declined {
-  color: #c62828;
-}
