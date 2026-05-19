@@ -1,5 +1,4 @@
 @import url("./event.style.css");
-@import url("./home.style.css");
 @import url("./create-event.style.css");
 @import url("./auth.style.css");
 
@@ -11,6 +10,10 @@ body > main.container {
 
 body > main.container > * {
   width: 100%;
+}
+
+.home-explanation > section {
+  margin-block: 2.5rem;
 }
 
 body > header.container {
