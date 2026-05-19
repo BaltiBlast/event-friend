@@ -1,3 +1,5 @@
+import { EventMapper } from "../../models/index.mapper.js";
+
 const participants = [
   { name: "Alex", status: "confirmed" },
   { name: "Camille", status: "pending" },
@@ -29,4 +31,26 @@ export function getCreateEventViewData() {
     title: "Creer un evenement",
     scripts: ["/js/create-event.js"],
   };
+}
+
+export async function createEvent(eventData, userId) {
+  const { user, userId: eventUserId, ...eventPayload } = eventData;
+
+  return EventMapper.createEvent({
+    ...eventPayload,
+    user: userId || user || eventUserId,
+    participants: formatParticipants(eventData.participants),
+  });
+}
+
+function formatParticipants(participants) {
+  if (!participants) {
+    return [];
+  }
+
+  if (Array.isArray(participants)) {
+    return participants;
+  }
+
+  return [participants];
 }

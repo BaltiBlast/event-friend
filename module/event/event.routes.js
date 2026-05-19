@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.get("/event", showEvent);
 router.get("/create-event", showCreateEvent);
+router.post("/events", createEvent);
 router.post("/create-event", createEvent);
 
 export default router;

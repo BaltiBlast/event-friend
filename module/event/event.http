@@ -1,0 +1,16 @@
+@baseUrl = http://localhost:3000
+
+### Create event with JSON
+POST {{baseUrl}}/events
+Content-Type: application/json
+
+{
+  "title": "Soiree jeux",
+  "description": "Une soiree conviviale autour de jeux de societe.",
+  "imageUrl": "https://example.com/event.jpg",
+  "location": "Paris",
+  "date": "2026-06-12",
+  "time": "20:00",
+  "userId": "6a0c71498fc01e219b0f2192",
+  "participants": ["Alex", "Camille"]
+}
