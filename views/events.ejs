@@ -1,13 +1,69 @@
 <section>
-  <h1>Mes événements</h1>
+  <div class="events-header">
+    <h1>Mes événements</h1>
+    <button type="button" data-event-modal-open="create-event-modal">Créer un événement</button>
+  </div>
 
   <% if (typeof successMessage !== 'undefined' && successMessage) { %>
     <span id="event-success-message" data-message="<%= successMessage %>" hidden></span>
   <% } %>
 
+  <% if (typeof error !== 'undefined') { %>
+    <p role="alert"><%= error %></p>
+  <% } %>
+
+  <dialog id="create-event-modal">
+    <article>
+      <header>
+        <button aria-label="Fermer" rel="prev" type="button" data-event-modal-close></button>
+        <h2>Créer un événement</h2>
+      </header>
+
+      <form action="/create-event" method="post">
+        <label for="title">
+          Titre <sub>obligatoire</sub>
+          <input type="text" id="title" name="title" required />
+        </label>
+
+        <label for="imageUrl">
+          Image <sub>optionnel</sub>
+          <input type="url" id="imageUrl" name="imageUrl" placeholder="https://..." />
+        </label>
+
+        <label for="location">
+          Lieu <sub>optionnel</sub>
+          <input type="text" id="location" name="location" />
+        </label>
+
+        <div class="create-event-date-time">
+          <label for="date">
+            Date <sub>obligatoire</sub>
+            <input type="date" id="date" name="date" required />
+          </label>
+
+          <label for="time">
+            Heure <sub>obligatoire</sub>
+            <input type="time" id="time" name="time" required />
+          </label>
+        </div>
+
+        <label for="description">
+          Description <sub>obligatoire</sub>
+          <textarea id="description" name="description" required></textarea>
+        </label>
+
+        <label for="participants">
+          Participants <sub>optionnel</sub>
+          <input type="text" id="participants" name="participants" placeholder="Alex, Camille" />
+        </label>
+
+        <button type="submit">Créer l'événement</button>
+      </form>
+    </article>
+  </dialog>
+
   <% if (events.length === 0) { %>
     <p>Vous n'avez pas encore d'événement.</p>
-    <p><a href="/create-event">Créer un événement</a></p>
   <% } else { %>
     <ul class="event-card-list">
       <% events.forEach((event) => { %>
