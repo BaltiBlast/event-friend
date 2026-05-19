@@ -10,3 +10,12 @@ Content-Type: application/json
   "firstName": "Fougeray",
   "password": "AdmiN@123"
 }
+
+### Login user with JSON
+POST {{baseUrl}}/login
+Content-Type: application/json
+
+{
+  "email": "fougeray.florian+gayvent@gmail.com",
+  "password": "AdmiN@123"
+}

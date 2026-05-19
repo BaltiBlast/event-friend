@@ -25,6 +25,10 @@ class User extends CoreMapper {
   async getUser(userId) {
     return this.model.findById(userId);
   }
+
+  async getUserByEmail(email) {
+    return this.model.findOne({ email });
+  }
 }
 
 export default User;

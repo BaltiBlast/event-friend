@@ -4,6 +4,7 @@ import session from "express-session";
 import expressLayouts from "express-ejs-layouts";
 import router from "./router.js";
 import connectDatabase from "./config/database.js";
+import { injectSessionInLocals } from "./utils/middlewares.js";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.use(
     saveUninitialized: false,
   })
 );
+app.use(injectSessionInLocals);
 app.use(router);
 
 const startServer = async () => {

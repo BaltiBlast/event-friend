@@ -1,3 +1,12 @@
+export function injectSessionInLocals(req, res, next) {
+  res.locals.user = req.session?.user;
+  res.locals.events = req.session?.events || [];
+
+  console.log(res.locals);
+
+  next();
+}
+
 export function isAuthenticated(req, res, next) {
   const user = req.session?.user || req.session?.userId;
 
