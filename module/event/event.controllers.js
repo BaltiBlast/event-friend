@@ -1,5 +1,6 @@
 import {
   createEvent as createEventService,
+  deleteEvent as deleteEventService,
   getCreateEventViewData,
   getEventViewData,
   getEventsViewData,
@@ -20,12 +21,19 @@ export async function createEvent(req, res) {
     const event = await createEventService(req.body, userId);
 
     req.session.events = [...(req.session.events || []), event.toObject()];
+    req.session.successMessage = `${event.title} a bien été créé !`;
 
     if (req.is("application/json")) {
       return res.status(201).json(event);
     }
 
-    return res.redirect("/events");
+    return req.session.save((error) => {
+      if (error) {
+        return res.status(500).send(error.message);
+      }
+
+      return res.redirect("/events");
+    });
   } catch (error) {
     if (req.is("application/json")) {
       return res.status(400).json({ message: error.message });
@@ -67,8 +75,43 @@ export async function updateEvent(req, res) {
 
       return sessionEvent;
     });
+    req.session.successMessage = `${event.title} a bien été mis à jour !`;
 
-    return res.redirect("/events");
+    return req.session.save((error) => {
+      if (error) {
+        return res.status(500).send(error.message);
+      }
+
+      return res.redirect("/events");
+    });
+  } catch (error) {
+    return res.status(400).send(error.message);
+  }
+}
+
+export async function deleteEvent(req, res) {
+  try {
+    const userId = req.user._id || req.user.id;
+    const event = await deleteEventService(req.params.eventId, userId);
+
+    if (!event) {
+      return res.status(404).send("Événement introuvable.");
+    }
+
+    req.session.events = (req.session.events || []).filter((sessionEvent) => {
+      const sessionEventId = sessionEvent._id?.toString() || sessionEvent.id;
+
+      return sessionEventId !== event.id;
+    });
+    req.session.successMessage = `${event.title} a bien été supprimé !`;
+
+    return req.session.save((error) => {
+      if (error) {
+        return res.status(500).send(error.message);
+      }
+
+      return res.redirect("/events");
+    });
   } catch (error) {
     return res.status(400).send(error.message);
   }

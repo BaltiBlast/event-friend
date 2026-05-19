@@ -1,6 +1,10 @@
 <section>
   <h1>Mes événements</h1>
 
+  <% if (typeof successMessage !== 'undefined' && successMessage) { %>
+    <span id="event-success-message" data-message="<%= successMessage %>" hidden></span>
+  <% } %>
+
   <% if (events.length === 0) { %>
     <p>Vous n'avez pas encore d'événement.</p>
     <p><a href="/create-event">Créer un événement</a></p>
@@ -93,6 +97,10 @@
                 </label>
 
                 <button type="submit">Modifier l'événement</button>
+              </form>
+
+              <form action="/events/<%= event.id %>/delete" method="post">
+                <button type="submit" data-confirm-delete>Supprimer l'événement</button>
               </form>
             </article>
           </dialog>

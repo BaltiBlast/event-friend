@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title || "Gay'vent" %></title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.pink.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
@@ -15,6 +16,8 @@
     <% if (typeof hideChrome === 'undefined' || !hideChrome) { %>
       <%- include('../partials/footer') %>
     <% } %>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="/js/utils/messages.js"></script>
     <% if (typeof scripts !== 'undefined') { %>
       <% scripts.forEach((script) => { %>
         <script src="<%= script %>"></script>

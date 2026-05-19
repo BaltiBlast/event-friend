@@ -3,8 +3,9 @@ export function injectSessionInLocals(req, res, next) {
   res.locals.user = req.user;
   res.locals.events = req.session?.events || [];
   res.locals.contacts = req.session?.contacts || [];
+  res.locals.successMessage = req.session?.successMessage;
 
-  console.log(res.locals);
+  delete req.session.successMessage;
 
   next();
 }

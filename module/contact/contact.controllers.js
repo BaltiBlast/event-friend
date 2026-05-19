@@ -15,6 +15,7 @@ export async function createContact(req, res) {
     const contact = await createContactService(req.body, userId);
 
     req.session.contacts = [...(req.session.contacts || []), contact.toObject()];
+    req.session.successMessage = `${contact.firstName} ${contact.lastName} a bien été ajouté aux contacts !`;
 
     return req.session.save((error) => {
       if (error) {
@@ -49,6 +50,7 @@ export async function updateContact(req, res) {
 
       return sessionContact;
     });
+    req.session.successMessage = `${contact.firstName} ${contact.lastName} a bien été mis à jour !`;
 
     return req.session.save((error) => {
       if (error) {
@@ -79,6 +81,7 @@ export async function deleteContact(req, res) {
 
       return sessionContactId !== contact.id;
     });
+    req.session.successMessage = `${contact.firstName} ${contact.lastName} a bien été supprimé des contacts !`;
 
     return req.session.save((error) => {
       if (error) {

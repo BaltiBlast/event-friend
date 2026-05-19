@@ -1,6 +1,11 @@
 const contactModal = document.querySelector("#contact-modal");
 const openContactModalButton = document.querySelector("#open-contact-modal");
 const closeContactModalButton = document.querySelector("#close-contact-modal");
+const contactSuccessMessage = document.querySelector("#contact-success-message");
+
+if (contactSuccessMessage) {
+  window.showSuccessMessage(contactSuccessMessage.dataset.message);
+}
 
 openContactModalButton.addEventListener("click", () => {
   contactModal.showModal();

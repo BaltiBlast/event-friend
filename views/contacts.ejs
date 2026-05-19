@@ -8,6 +8,10 @@
     <p role="alert"><%= error %></p>
   <% } %>
 
+  <% if (typeof successMessage !== 'undefined' && successMessage) { %>
+    <span id="contact-success-message" data-message="<%= successMessage %>" hidden></span>
+  <% } %>
+
   <dialog id="contact-modal">
     <article>
       <header>

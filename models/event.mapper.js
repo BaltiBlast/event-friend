@@ -22,6 +22,13 @@ class Event extends CoreMapper {
     return this.model.findByIdAndDelete(eventId);
   }
 
+  async deleteEventByIdAndUser(eventId, userId) {
+    return this.model.findOneAndDelete({
+      _id: eventId,
+      user: userId,
+    });
+  }
+
   async getEventsByUser(userId) {
     return this.model.find({ user: userId }).sort({ date: 1, time: 1 });
   }

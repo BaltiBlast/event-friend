@@ -39,6 +39,10 @@ export async function updateEvent(eventId, eventData, userId) {
   });
 }
 
+export async function deleteEvent(eventId, userId) {
+  return EventMapper.deleteEventByIdAndUser(eventId, userId);
+}
+
 export async function getEventViewData(eventId, userId) {
   const event = await EventMapper.getEventByIdAndUser(eventId, userId);
 
