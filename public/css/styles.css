@@ -1,6 +1,7 @@
 @import url("./event.style.css");
 @import url("./create-event.style.css");
 @import url("./auth.style.css");
+@import url("./contact.style.css");
 
 body > main.container {
   align-items: center;

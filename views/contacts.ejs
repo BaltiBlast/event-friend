@@ -1,0 +1,161 @@
+<section>
+  <div class="contacts-header">
+    <h1>Contacts</h1>
+    <button type="button" id="open-contact-modal">Ajouter contact</button>
+  </div>
+
+  <% if (typeof error !== 'undefined') { %>
+    <p role="alert"><%= error %></p>
+  <% } %>
+
+  <dialog id="contact-modal">
+    <article>
+      <header>
+        <button id="close-contact-modal" aria-label="Fermer" rel="prev" type="button"></button>
+        <h2>Ajouter un contact</h2>
+      </header>
+
+      <form action="/contacts" method="post">
+        <label for="lastName">
+          Nom <sub>obligatoire</sub>
+          <input type="text" id="lastName" name="lastName" autocomplete="family-name" required />
+        </label>
+
+        <label for="firstName">
+          Prénom <sub>obligatoire</sub>
+          <input type="text" id="firstName" name="firstName" autocomplete="given-name" required />
+        </label>
+
+        <label for="nickname">
+          Surnom <sub>optionnel</sub>
+          <input type="text" id="nickname" name="nickname" />
+        </label>
+
+        <label for="email">
+          Email <sub>obligatoire</sub>
+          <input type="email" id="email" name="email" autocomplete="email" required />
+        </label>
+
+        <label for="phone">
+          Téléphone <sub>optionnel</sub>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" />
+        </label>
+
+        <label for="address">
+          Adresse <sub>optionnel</sub>
+          <input type="text" id="address" name="address" autocomplete="street-address" />
+        </label>
+
+        <button type="submit">Ajouter le contact</button>
+      </form>
+    </article>
+  </dialog>
+
+  <% if (contacts.length === 0) { %>
+    <p>Vous n'avez pas encore de contact.</p>
+  <% } else { %>
+    <ul class="contacts-grid">
+      <% contacts.forEach((contact) => { %>
+        <li>
+          <button
+            class="contact-card"
+            type="button"
+            data-contact-modal-open="contact-<%= contact._id %>"
+          >
+          <div>
+            <strong><%= contact.lastName %> <%= contact.firstName %></strong>
+            <span></span>
+          </div>
+            
+            <span><%= contact.nickname ? contact.nickname : "..." %></span>
+          </button>
+
+          <dialog id="contact-<%= contact._id %>">
+            <article>
+              <header>
+                <button aria-label="Fermer" rel="prev" type="button" data-contact-modal-close></button>
+                <h2><%= contact.firstName %> <%= contact.lastName %></h2>
+              </header>
+
+              <form action="/contacts/<%= contact._id %>/update" method="post">
+                <label for="lastName-<%= contact._id %>">
+                  Nom <sub>obligatoire</sub>
+                  <input
+                    type="text"
+                    id="lastName-<%= contact._id %>"
+                    name="lastName"
+                    value="<%= contact.lastName %>"
+                    autocomplete="family-name"
+                    required
+                  />
+                </label>
+
+                <label for="firstName-<%= contact._id %>">
+                  Prénom <sub>obligatoire</sub>
+                  <input
+                    type="text"
+                    id="firstName-<%= contact._id %>"
+                    name="firstName"
+                    value="<%= contact.firstName %>"
+                    autocomplete="given-name"
+                    required
+                  />
+                </label>
+
+                <label for="nickname-<%= contact._id %>">
+                  Surnom <sub>optionnel</sub>
+                  <input
+                    type="text"
+                    id="nickname-<%= contact._id %>"
+                    name="nickname"
+                    value="<%= contact.nickname || '' %>"
+                  />
+                </label>
+
+                <label for="email-<%= contact._id %>">
+                  Email <sub>obligatoire</sub>
+                  <input
+                    type="email"
+                    id="email-<%= contact._id %>"
+                    name="email"
+                    value="<%= contact.email %>"
+                    autocomplete="email"
+                    required
+                  />
+                </label>
+
+                <label for="phone-<%= contact._id %>">
+                  Téléphone <sub>optionnel</sub>
+                  <input
+                    type="tel"
+                    id="phone-<%= contact._id %>"
+                    name="phone"
+                    value="<%= contact.phone || '' %>"
+                    autocomplete="tel"
+                  />
+                </label>
+
+                <label for="address-<%= contact._id %>">
+                  Adresse <sub>optionnel</sub>
+                  <input
+                    type="text"
+                    id="address-<%= contact._id %>"
+                    name="address"
+                    value="<%= contact.address || '' %>"
+                    autocomplete="street-address"
+                  />
+                </label>
+
+                <button class="contact-update-button" type="submit">Modifier le contact</button>
+              </form>
+
+              <form action="/contacts/<%= contact._id %>/delete" method="post">
+                <button class="contact-delete-button" type="submit" data-confirm-delete>Supprimer le contact</button>
+              </form>
+            </article>
+          </dialog>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+</section>

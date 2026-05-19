@@ -1,5 +1,5 @@
 import argon2 from "argon2";
-import { EventMapper, UserMapper } from "../../models/index.mapper.js";
+import { ContactMapper, EventMapper, UserMapper } from "../../models/index.mapper.js";
 
 export function getLoginViewData() {
   return {
@@ -36,10 +36,12 @@ export async function loginUser(userData) {
 
   const loggedUser = removePassword(user);
   const events = await EventMapper.getEventsByUser(loggedUser._id);
+  const contacts = await ContactMapper.getContactsByUser(loggedUser._id);
 
   return {
     user: loggedUser,
     events: events.map((event) => event.toObject()),
+    contacts: contacts.map((contact) => contact.toObject()),
   };
 }
 

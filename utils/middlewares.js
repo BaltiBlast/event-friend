@@ -2,6 +2,9 @@ export function injectSessionInLocals(req, res, next) {
   req.user = req.session?.user;
   res.locals.user = req.user;
   res.locals.events = req.session?.events || [];
+  res.locals.contacts = req.session?.contacts || [];
+
+  console.log(res.locals);
 
   next();
 }

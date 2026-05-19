@@ -19,13 +19,15 @@ export async function register(req, res) {
 
 export async function login(req, res) {
   try {
-    const { user, events } = await loginUser(req.body);
+    const { user, events, contacts } = await loginUser(req.body);
 
     req.session.user = user;
     req.session.events = events;
+    req.session.contacts = contacts;
     req.user = user;
     res.locals.user = req.user;
     res.locals.events = events;
+    res.locals.contacts = contacts;
 
     return req.session.save((error) => {
       if (error) {
