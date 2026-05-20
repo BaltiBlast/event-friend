@@ -1,4 +1,5 @@
 <section>
+  <script id="contacts-data" type="application/json"><%- JSON.stringify(contacts || []) %></script>
   <div class="events-header">
     <h1>Mes événements</h1>
     <a role="button" href="/events/create">Créer un événement</a>
@@ -11,6 +12,67 @@
   <% if (typeof error !== 'undefined') { %>
     <p role="alert"><%= error %></p>
   <% } %>
+
+  <dialog id="create-event-modal">
+    <article>
+      <header>
+        <button aria-label="Fermer" rel="prev" type="button" data-event-modal-close></button>
+        <h2>Créer un événement</h2>
+      </header>
+
+      <form action="/create-event" method="post">
+        <label for="title">
+          Titre <sub>obligatoire</sub>
+          <input type="text" id="title" name="title" required />
+        </label>
+
+        <label for="imageUrl">
+          Image <sub>optionnel</sub>
+          <input type="url" id="imageUrl" name="imageUrl" placeholder="https://..." />
+        </label>
+
+        <label for="location">
+          Lieu <sub>optionnel</sub>
+          <input type="text" id="location" name="location" />
+        </label>
+
+        <div class="create-event-date-time">
+          <label for="date">
+            Date <sub>obligatoire</sub>
+            <input type="date" id="date" name="date" required />
+          </label>
+
+          <label for="time">
+            Heure <sub>obligatoire</sub>
+            <input type="time" id="time" name="time" required />
+          </label>
+        </div>
+
+        <label for="description">
+          Description <sub>obligatoire</sub>
+          <textarea id="description" name="description" required></textarea>
+        </label>
+
+        <label for="participants-search-create-event-modal">
+          Participants <sub>optionnel</sub>
+          <div class="participants-picker" data-participants-picker>
+            <div class="participants-tags" data-participants-tags></div>
+            <input type="hidden" name="participants" data-participants-hidden />
+            <input
+              type="text"
+              id="participants-search-create-event-modal"
+              data-participants-search
+              placeholder="Rechercher un participant"
+              autocomplete="off"
+            />
+            <div class="participants-options" data-participants-options hidden></div>
+          </div>
+        </label>
+
+        <button type="submit">Créer l'événement</button>
+      </form>
+    </article>
+  </dialog>
 
   <% if (events.length === 0) { %>
     <p>Vous n'avez pas encore d'événement.</p>
