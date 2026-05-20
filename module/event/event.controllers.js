@@ -1,6 +1,7 @@
 import {
   createEvent as createEventService,
   deleteEvent as deleteEventService,
+  getCreateEventViewData,
   getEventViewData,
   getEventsViewData,
   updateEvent as updateEventService,
@@ -11,7 +12,7 @@ export function showEvents(req, res) {
 }
 
 export function showCreateEvent(req, res) {
-  res.redirect("/events");
+  res.render("create-event", getCreateEventViewData());
 }
 
 export async function createEvent(req, res) {
@@ -38,8 +39,8 @@ export async function createEvent(req, res) {
       return res.status(400).json({ message: error.message });
     }
 
-    return res.status(400).render("events", {
-      ...getEventsViewData(res.locals.events),
+    return res.status(400).render("create-event", {
+      ...getCreateEventViewData(),
       error: error.message,
     });
   }
