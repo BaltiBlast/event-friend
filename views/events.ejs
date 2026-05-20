@@ -1,4 +1,5 @@
 <section>
+  <script id="contacts-data" type="application/json"><%- JSON.stringify(contacts || []) %></script>
   <div class="events-header">
     <h1>Mes événements</h1>
     <button type="button" data-event-modal-open="create-event-modal">Créer un événement</button>
@@ -52,9 +53,20 @@
           <textarea id="description" name="description" required></textarea>
         </label>
 
-        <label for="participants">
+        <label for="participants-search-create-event-modal">
           Participants <sub>optionnel</sub>
-          <input type="text" id="participants" name="participants" placeholder="Alex, Camille" />
+          <div class="participants-picker" data-participants-picker>
+            <div class="participants-tags" data-participants-tags></div>
+            <input type="hidden" name="participants" data-participants-hidden />
+            <input
+              type="text"
+              id="participants-search-create-event-modal"
+              data-participants-search
+              placeholder="Rechercher un participant"
+              autocomplete="off"
+            />
+            <div class="participants-options" data-participants-options hidden></div>
+          </div>
         </label>
 
         <button type="submit">Créer l'événement</button>
@@ -141,15 +153,25 @@
                   <textarea id="description-<%= event.id %>" name="description" required><%= event.description %></textarea>
                 </label>
 
-                <label for="participants-<%= event.id %>">
+                <label for="participants-search-<%= event.id %>">
                   Participants <sub>optionnel</sub>
-                  <input
-                    type="text"
-                    id="participants-<%= event.id %>"
-                    name="participants"
-                    value="<%= event.participants.join(', ') %>"
-                    placeholder="Alex, Camille"
-                  />
+                  <div class="participants-picker" data-participants-picker>
+                    <div class="participants-tags" data-participants-tags></div>
+                    <input
+                      type="hidden"
+                      name="participants"
+                      data-participants-hidden
+                      value="<%= event.participants.join(', ') %>"
+                    />
+                    <input
+                      type="text"
+                      id="participants-search-<%= event.id %>"
+                      data-participants-search
+                      placeholder="Rechercher un participant"
+                      autocomplete="off"
+                    />
+                    <div class="participants-options" data-participants-options hidden></div>
+                  </div>
                 </label>
 
                 <button type="submit">Modifier l'événement</button>
