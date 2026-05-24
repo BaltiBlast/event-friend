@@ -2,7 +2,7 @@
   <script id="contacts-data" type="application/json"><%- JSON.stringify(contacts || []) %></script>
   <div class="events-header">
     <h1>Mes événements</h1>
-    <a role="button" href="/events/create">Créer un événement</a>
+    <button type="button" data-event-modal-open="create-event-modal">Créer un événement</button>
   </div>
 
   <% if (typeof successMessage !== 'undefined' && successMessage) { %>

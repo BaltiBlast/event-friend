@@ -8,13 +8,6 @@ export function getEventsViewData(events) {
   };
 }
 
-export function getCreateEventViewData() {
-  return {
-    title: "Créer un événement",
-    scripts: ["/js/events.js"],
-  };
-}
-
 export async function createEvent(eventData, userId) {
   const { user, userId: eventUserId, ...eventPayload } = eventData;
 
